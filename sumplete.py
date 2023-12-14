@@ -1,5 +1,77 @@
 from typing import List, Tuple
 
+def initialize_variables(variables, domains, constraints, neighbors):
+    assignment = {}
+    for var in variables:
+        assignment[var] = domains[var][0]  # Initialize with the first value in the domain
+        if not is_consistent(var, assignment[var], assignment, constraints, domains, neighbors):
+            # If constraints are not satisfied, backtrack and try the second value
+            assignment[var] = domains[var][1]
+    return assignment
+
+def order_variables(variables, domains):
+    return sorted(variables, key=lambda var: len(domains[var]))
+
+def is_consistent(variable, value, assignment, constraints, domains, neighbors):
+    # Check unary constraints
+    if variable in constraints and value not in constraints[variable]:
+        return False
+
+    # Check binary constraints
+    for neighbor in neighbors[variable]:
+        if neighbor in assignment:
+            if (neighbor, value, variable, assignment[neighbor]) in constraints:
+                return False
+            if (variable, value, neighbor, assignment[neighbor]) in constraints:
+                return False
+
+    return True
+
+def reduce_domain(variable, value, domains, assignment, constraints):
+    reduced_domain = [v for v in domains[variable] if is_consistent(variable, v, assignment, constraints, domains)]
+    return reduced_domain
+
+def assign_value(variable, value, assignment):
+    assignment[variable] = value
+
+def forward_check(variable, value, domains, assignment, constraints):
+    for neighbor in domains[variable]:
+        if neighbor not in assignment:
+            domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+            
+def select_unassigned_variable(assignment, variables, domains):
+    unassigned_variables = [var for var in variables if not assignment[var]]
+    return unassigned_variables[0] if unassigned_variables else None
+
+def order_domain_values(variable, domains, assignment, constraints):
+    # You can implement your own value ordering heuristic here.
+    return domains[variable]
+
+def backtrack_search(assignment, variables, domains, constraints, neighbors):
+    if all(assignment[var] for var in variables):
+        return assignment  # Solution found
+
+    var = select_unassigned_variable(assignment, variables, domains)
+    ordered_values = order_domain_values(var, domains, assignment, constraints)
+
+    for value in ordered_values:
+        if is_consistent(var, value, assignment, constraints, domains, neighbors):
+            assign_value(var, value, assignment)
+            forward_check(var, value, domains, assignment, constraints)
+
+            result = backtrack_search(assignment, variables, domains, constraints, neighbors)
+            if result:
+                return result  # Solution found
+
+            # Backtrack
+            assignment[var] = ''
+            for neighbor in domains[var]:
+                if neighbor not in assignment:
+                    domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+
+    return None  # No solution
+
+
 def generate_variables(size: Tuple[int, int]) -> List[str]:
     return ['G{}'.format(i + 1) for i in range(size[0] * size[1])]
 
@@ -31,7 +103,7 @@ def generate_neighbors(size: Tuple[int, int]):
 def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], row_sums: List[int], col_sums: List[int]) -> dict:
     constraints = {}
 
-    # Unary constraints
+    # Unary constraints for grid values
     unary_constraints = {}
     for i in range(size[0]):
         for j in range(size[1]):
@@ -43,13 +115,13 @@ def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], ro
     for i in range(size[0]):
         row_variables = ['G{}'.format(i * size[1] + j + 1) for j in range(size[1])]
         constraint_key = '+'.join(row_variables)
-        constraints[constraint_key] = {'S{}'.format(i + 1)}
+        constraints[constraint_key] = {str(row_sums[i])}
 
     # Binary constraints for column sums
     for j in range(size[1]):
         col_variables = ['G{}'.format(i * size[1] + j + 1) for i in range(size[0])]
         constraint_key = '+'.join(col_variables)
-        constraints[constraint_key] = {'S{}'.format(size[0] + j + 1)}
+        constraints[constraint_key] = {str(col_sums[j])}
 
     return constraints
 
@@ -59,11 +131,21 @@ def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_su
     domains = generate_domains(size, grid_values)
     constraints = generate_constraints(size, grid_values, row_sums, col_sums)
     neighbors = generate_neighbors(size)
+    assignment = initialize_variables(variables, domains, constraints, neighbors)
+    result = backtrack_search(assignment, variables, domains, constraints, neighbors)
     # Display the generated variables and domains (optional)
     print("Variables:", variables)
     print("Domains:", domains)
     print("Constraints:", constraints)
     print("Neighbors:", neighbors)
+    print("Result:", result)
+    
+    if result:
+        print("Solution found:")
+        for var, value in result.items():
+            print("{var}: {value}")
+    else:
+        print("No solution found.")
     
 
 def is_valid_grid_size(size: Tuple[int, int]) -> bool:
