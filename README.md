@@ -6,11 +6,11 @@ This repository houses an implementation of a Sumplete Solver, a Python-based so
 
 ![1702596010044](image/README/1702596010044.png)
 
-Celestial Convergence:
+**Celestial Convergence:**
 
 Through the Mystical Logic Portal, witness the transcendence of numbers and constraints, converging in a cosmic dance to unveil the secrets of Sumplete's enigmatic puzzles. Embark on a journey where logical realms intertwine with celestial wonders, guiding us through the captivating landscape of AI-driven puzzle-solving.
 
-Sumplete: The Game and Its Origin
+# Sumplete: The Game and Its Origin
 
 ## Sumplete Overview
 
