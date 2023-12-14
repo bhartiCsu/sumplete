@@ -14,11 +14,12 @@ Through the Mystical Logic Portal, witness the transcendence of numbers and cons
 
 ## Sumplete Overview
 
-Sumplete is a logic-based number game where players fill a grid based on row and column sums while adhering to specific constraints. The game was introduced through the Sumplete website, offering various puzzles of different sizes and difficulties. As an AI invention, Sumplete showcases the creativity of AI models like ChatGPT in designing engaging games.
+Sumplete is a logic-based number game where players fill a grid based on row and column sums while adhering to specific constraints. The game was introduced through the Sumplete website([https://sumplete.com/](https://sumplete.com/)), offering various puzzles of different sizes and difficulties. As an AI invention, Sumplete showcases the creativity of AI models like ChatGPT in designing engaging games.
 
 ## Creation and Concept
 
 While technically, ChatGPT doesn't invent anything as a stochastic parrot, it demonstrates the capability of AI to generate novel concepts and rule sets. Sumplete combines elements of puzzle-solving and constraint satisfaction problems, making it an interesting challenge for AI enthusiasts and players alike.
+READ MORE: [https://sumplete.com/about/](https://sumplete.com/about/)
 
 # Sumplete Rules
 
@@ -53,17 +54,35 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 * `sumplete.py`: Main Python script containing the SumpleteSolver class implementation.
 * `README.md`: This file, providing an overview of the project.
 
+
+## Grids Used
+
+## 3x3
+
+
+## 4x4
+
+## 5x5
+
+![1702597113231](image/README/1702597113231.png)
+
+## 6x6
+
+![1702597123745](image/README/1702597123745.png)
+
+
+
 ## Getting Started
 
 ..............Write Instructions Here
 
-# Documentation
+## Documentation
 
 Project Guidelines: [https://docs.google.com/document/d/18OP_GsF_aYSSRWobFfqXCMx3myt1GoHwXu5R68DS7LM/edit?usp=sharing
 
 ](https://docs.google.com/document/d/18OP_GsF_aYSSRWobFfqXCMx3myt1GoHwXu5R68DS7LM/edit?usp=sharing)
 
-# Acknowledgements
+## Acknowledgements
 
 We would like to express our sincere gratitude to Professor Kenytt Avery for his invaluable guidance and support throughout the development of this project. His expertise and insights have been instrumental in shaping our understanding of artificial intelligence and constraint satisfaction problems.
 
