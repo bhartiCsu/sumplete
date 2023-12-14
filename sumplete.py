@@ -54,6 +54,7 @@ def order_domain_values(variable, domains, assignment, constraints):
 def backtrack_search(assignment, variables, domains, constraints, neighbors):
     print(f"Debug: Current assignment: {assignment}")
     if all(assignment[var] for var in variables):
+        print(f"Debug: all(assignment[var] for var in variables) is True, Returning assignment: {assignment}")
         return assignment  # Solution found
 
     var = select_unassigned_variable(assignment, variables, domains)
@@ -66,6 +67,7 @@ def backtrack_search(assignment, variables, domains, constraints, neighbors):
 
             result = backtrack_search(assignment, variables, domains, constraints, neighbors)
             if result:
+                print(f"Debug: result from backtrack search: {result}")
                 return result  # Solution found
 
             # Backtrack
@@ -75,6 +77,7 @@ def backtrack_search(assignment, variables, domains, constraints, neighbors):
                 if neighbor not in assignment:
                     domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
 
+    print("Debug: At the end of backtracking algorithm, no solution found.")
     return None  # No solution
 
 
@@ -149,7 +152,7 @@ def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_su
     if result:
         print("Solution found:")
         for var, value in result.items():
-            print("{var}: {value}")
+            print(f"{var}: {value}")
     else:
         print("No solution found.")
 
