@@ -11,6 +11,23 @@ def generate_domains(size: Tuple[int, int], grid_values: List[List[int]]) -> dic
             domains[variable] = [0, grid_values[i][j]]
     return domains
 
+def generate_neighbors(size: Tuple[int, int]):
+    neighbors = {}
+    for i in range(size[0]):
+        for j in range(size[1]):
+            current_var = 'G{}'.format(i * size[1] + j + 1)
+            neighbor_vars = [current_var]
+
+            # Add neighbors in the same row
+            neighbor_vars += ['G{}'.format(i * size[1] + k + 1) for k in range(size[1]) if k != j]
+
+            # Add neighbors in the same column
+            neighbor_vars += ['G{}'.format(k * size[1] + j + 1) for k in range(size[0]) if k != i]
+
+            neighbors[current_var] = neighbor_vars
+
+    return neighbors
+
 def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], row_sums: List[int], col_sums: List[int]) -> dict:
     constraints = {}
 
@@ -41,11 +58,13 @@ def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_su
     variables = generate_variables(size)
     domains = generate_domains(size, grid_values)
     constraints = generate_constraints(size, grid_values, row_sums, col_sums)
-
+    neighbors = generate_neighbors(size)
     # Display the generated variables and domains (optional)
     print("Variables:", variables)
     print("Domains:", domains)
     print("Constraints:", constraints)
+    print("Neighbors:", neighbors)
+    
 
 def is_valid_grid_size(size: Tuple[int, int]) -> bool:
     valid_sizes = [(3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)]
