@@ -25,14 +25,14 @@ def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], ro
     # Binary constraints for row sums
     for i in range(size[0]):
         row_variables = ['G{}'.format(i * size[1] + j + 1) for j in range(size[1])]
-        constraint_key = 'S{}'.format(i + 1)
-        constraints[constraint_key] = {'+'.join(row_variables), str(row_sums[i])}
+        constraint_key = '+'.join(row_variables)
+        constraints[constraint_key] = {'S{}'.format(i + 1)}
 
     # Binary constraints for column sums
     for j in range(size[1]):
         col_variables = ['G{}'.format(i * size[1] + j + 1) for i in range(size[0])]
-        constraint_key = 'S{}'.format(size[0] + j + 1)
-        constraints[constraint_key] = {'+'.join(col_variables), str(col_sums[j])}
+        constraint_key = '+'.join(col_variables)
+        constraints[constraint_key] = {'S{}'.format(size[0] + j + 1)}
 
     return constraints
 
