@@ -4,15 +4,12 @@
 
 This repository houses an implementation of a Sumplete Solver, a Python-based solution for Sumplete puzzles—a number game where players fill a grid based on row and column sums while adhering to specific constraints.
 
-
 ![1702596010044](image/README/1702596010044.png)
-
 
 Celestial Convergence:
 
 Through the Mystical Logic Portal, witness the transcendence of numbers and constraints, converging in a cosmic dance to unveil the secrets of Sumplete's enigmatic puzzles. Embark on a journey where logical realms intertwine with celestial wonders, guiding us through the captivating landscape of AI-driven puzzle-solving.
 
-# 
 Sumplete: The Game and Its Origin
 
 ## Sumplete Overview
@@ -58,4 +55,21 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 
 ## Getting Started
 
-..............
+..............Write Instructions Here
+
+# Documentation
+
+Project Guidelines: [https://docs.google.com/document/d/18OP_GsF_aYSSRWobFfqXCMx3myt1GoHwXu5R68DS7LM/edit?usp=sharing
+
+](https://docs.google.com/document/d/18OP_GsF_aYSSRWobFfqXCMx3myt1GoHwXu5R68DS7LM/edit?usp=sharing)
+
+# Acknowledgements
+
+We would like to express our sincere gratitude to Professor Kenytt Avery for his invaluable guidance and support throughout the development of this project. His expertise and insights have been instrumental in shaping our understanding of artificial intelligence and constraint satisfaction problems.
+
+We also extend our thanks to the creators of the Sumplete game for providing the foundation for our project. Additionally, our appreciation goes to the CPSC 481 - Artificial Intelligence course for fostering an environment that encourages exploration and innovation.
+
+
+## License
+
+This project is licensed under the MIT License.
