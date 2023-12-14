@@ -15,14 +15,17 @@ def order_variables(variables, domains):
 def is_consistent(variable, value, assignment, constraints, domains, neighbors):
     # Check unary constraints
     if variable in constraints and value not in constraints[variable]:
+        print(f"Debug: Unary constraint violated for variable {variable} with value {value}")
         return False
 
     # Check binary constraints
     for neighbor in neighbors[variable]:
         if neighbor in assignment:
             if (neighbor, value, variable, assignment[neighbor]) in constraints:
+                print(f"Debug: Binary constraint violated between {variable} and {neighbor}")
                 return False
             if (variable, value, neighbor, assignment[neighbor]) in constraints:
+                print(f"Debug: Binary constraint violated between {variable} and {neighbor}")
                 return False
 
     return True
@@ -32,13 +35,14 @@ def reduce_domain(variable, value, domains, assignment, constraints):
     return reduced_domain
 
 def assign_value(variable, value, assignment):
+    print(f"Debug: Assigning variable {variable} to value {value}")
     assignment[variable] = value
 
 def forward_check(variable, value, domains, assignment, constraints):
     for neighbor in domains[variable]:
         if neighbor not in assignment:
             domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
-            
+
 def select_unassigned_variable(assignment, variables, domains):
     unassigned_variables = [var for var in variables if not assignment[var]]
     return unassigned_variables[0] if unassigned_variables else None
@@ -48,6 +52,7 @@ def order_domain_values(variable, domains, assignment, constraints):
     return domains[variable]
 
 def backtrack_search(assignment, variables, domains, constraints, neighbors):
+    print(f"Debug: Current assignment: {assignment}")
     if all(assignment[var] for var in variables):
         return assignment  # Solution found
 
@@ -64,6 +69,7 @@ def backtrack_search(assignment, variables, domains, constraints, neighbors):
                 return result  # Solution found
 
             # Backtrack
+            print(f"Debug: Backtracking on variable {var}")
             assignment[var] = ''
             for neighbor in domains[var]:
                 if neighbor not in assignment:
@@ -139,14 +145,14 @@ def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_su
     print("Constraints:", constraints)
     print("Neighbors:", neighbors)
     print("Result:", result)
-    
+
     if result:
         print("Solution found:")
         for var, value in result.items():
             print("{var}: {value}")
     else:
         print("No solution found.")
-    
+
 
 def is_valid_grid_size(size: Tuple[int, int]) -> bool:
     valid_sizes = [(3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)]
@@ -234,7 +240,7 @@ def main():
     print("Row Sums:", row_sums)
     print("Column Sums:", col_sums)
     get_sumplete_csp(size, grid, row_sums, col_sums)
-    
+
 
 if __name__ == "__main__":
     main()
