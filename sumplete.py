@@ -1,5 +1,52 @@
 from typing import List, Tuple
 
+def generate_variables(size: Tuple[int, int]) -> List[str]:
+    return ['G{}'.format(i + 1) for i in range(size[0] * size[1])]
+
+def generate_domains(size: Tuple[int, int], grid_values: List[List[int]]) -> dict:
+    domains = {}
+    for i in range(size[0]):
+        for j in range(size[1]):
+            variable = 'G{}'.format(i * size[1] + j + 1)
+            domains[variable] = [0, grid_values[i][j]]
+    return domains
+
+def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], row_sums: List[int], col_sums: List[int]) -> dict:
+    constraints = {}
+
+    # Unary constraints
+    unary_constraints = {}
+    for i in range(size[0]):
+        for j in range(size[1]):
+            variable = 'G{}'.format(i * size[1] + j + 1)
+            unary_constraints[variable] = {'0', str(grid_values[i][j])}
+    constraints.update(unary_constraints)
+
+    # Binary constraints for row sums
+    for i in range(size[0]):
+        row_variables = ['G{}'.format(i * size[1] + j + 1) for j in range(size[1])]
+        constraint_key = 'S{}'.format(i + 1)
+        constraints[constraint_key] = {'+'.join(row_variables), str(row_sums[i])}
+
+    # Binary constraints for column sums
+    for j in range(size[1]):
+        col_variables = ['G{}'.format(i * size[1] + j + 1) for i in range(size[0])]
+        constraint_key = 'S{}'.format(size[0] + j + 1)
+        constraints[constraint_key] = {'+'.join(col_variables), str(col_sums[j])}
+
+    return constraints
+
+def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_sums: List[int], col_sums: List[int]) -> Tuple[List[List[int]], List[int], List[int]]:
+    # Generate variables, domains, and constraints
+    variables = generate_variables(size)
+    domains = generate_domains(size, grid_values)
+    constraints = generate_constraints(size, grid_values, row_sums, col_sums)
+
+    # Display the generated variables and domains (optional)
+    print("Variables:", variables)
+    print("Domains:", domains)
+    print("Constraints:", constraints)
+
 def is_valid_grid_size(size: Tuple[int, int]) -> bool:
     valid_sizes = [(3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)]
     return size in valid_sizes
@@ -85,6 +132,8 @@ def main():
         print(row)
     print("Row Sums:", row_sums)
     print("Column Sums:", col_sums)
+    get_sumplete_csp(size, grid, row_sums, col_sums)
+    
 
 if __name__ == "__main__":
     main()
