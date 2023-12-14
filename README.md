@@ -4,7 +4,16 @@
 
 This repository houses an implementation of a Sumplete Solver, a Python-based solution for Sumplete puzzles—a number game where players fill a grid based on row and column sums while adhering to specific constraints.
 
-# Sumplete: The Game and Its Origin
+
+![1702596010044](image/README/1702596010044.png)
+
+
+Celestial Convergence:
+
+Through the Mystical Logic Portal, witness the transcendence of numbers and constraints, converging in a cosmic dance to unveil the secrets of Sumplete's enigmatic puzzles. Embark on a journey where logical realms intertwine with celestial wonders, guiding us through the captivating landscape of AI-driven puzzle-solving.
+
+# 
+Sumplete: The Game and Its Origin
 
 ## Sumplete Overview
 
