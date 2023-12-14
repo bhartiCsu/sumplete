@@ -44,9 +44,7 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 
 ## Project Structure
 
-* `sumplete_solver.py`: Main Python script containing the SumpleteSolver class implementation.
-* `examples/`: Directory containing example Sumplete puzzles and their solutions.
-* `tests/`: Directory for test scripts and test data.
+* `sumplete.py`: Main Python script containing the SumpleteSolver class implementation.
 * `README.md`: This file, providing an overview of the project.
 
 ## Getting Started
