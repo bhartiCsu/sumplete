@@ -1,5 +1,5 @@
 from typing import List, Tuple
-"""
+
 def initialize_variables(variables, domains, constraints, neighbors):
     assignment = {}
     for var in variables:
@@ -8,9 +8,6 @@ def initialize_variables(variables, domains, constraints, neighbors):
             # If constraints are not satisfied, backtrack and try the second value
             assignment[var] = domains[var][1]
     return assignment
-"""
-def initialize_variables(variables, domains):
-    return {var: None for var in variables}
 
 def order_variables(variables, domains):
     return sorted(variables, key=lambda var: len(domains[var]))
@@ -46,17 +43,18 @@ def assign_value(variable, value, assignment):
     print(f"Debug: Assigning variable {variable} to value {value}")
     assignment[variable] = value
 
-def forward_check(variable, value, domains, assignment, constraints):
+def forward_check(variable, value, domains, assignment, constraints, neighbors):
     for neighbor in domains[variable]:
         if neighbor not in assignment:
-            domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+            #domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+            domains[neighbor] = reduce_domain(variable, domains, assignment, constraints, neighbors)
+
 
 def select_unassigned_variable(assignment, variables, domains):
     unassigned_variables = [var for var in variables if not assignment[var]]
     return unassigned_variables[0] if unassigned_variables else None
 
 def order_domain_values(variable, domains, assignment, constraints):
-    # You can implement your own value ordering heuristic here.
     return domains[variable]
 
 def is_solution(assignment, constraints, size):
@@ -65,13 +63,13 @@ def is_solution(assignment, constraints, size):
     for i in range(size[0]):
         row_sum = sum(assignment['G{}'.format(i * size[1] + j + 1)] for j in range(size[1]))
         print(f"Debug: row sum: {row_sum}")
-        if str(row_sum) not in constraints['+'.join(['G{}'.format(i * size[1] + j + 1) for j in range(size[1])])]:
+        if row_sum not in constraints['+'.join(['G{}'.format(i * size[1] + j + 1) for j in range(size[1])])]:
             return False
 
     for j in range(size[1]):
         col_sum = sum(assignment['G{}'.format(i * size[1] + j + 1)] for i in range(size[0]))
         print(f"Debug: col sum: {col_sum}")
-        if str(col_sum) not in constraints['+'.join(['G{}'.format(i * size[1] + j + 1) for i in range(size[0])])]:
+        if col_sum not in constraints['+'.join(['G{}'.format(i * size[1] + j + 1) for i in range(size[0])])]:
             return False
 
     return True
@@ -83,33 +81,35 @@ def backtrack_search(assignment, variables, domains, constraints, neighbors, siz
           print(f"Debug: Solution satisfies all constraints. Returning assignment: {assignment}")
           return assignment  # Solution found
         else:
-            print(f"Debug: Current assignment does not satisfy all constraints.")
-            return None
+          print(f"Debug: Current assignment does not satisfy all constraints.")
+          return None
 
     var = select_unassigned_variable(assignment, variables, domains)
-    #ordered_values = order_domain_values(var, domains, assignment, constraints)
+    print(f"Debug: var: {var}")
+    ordered_values = order_domain_values(var, domains, assignment, constraints)
+    print(f"Debug: ordered_values: {ordered_values}")
 
-    for value in order_domain_values(var, domains, assignment, constraints):
+    for value in ordered_values:
         if is_consistent(var, value, assignment, constraints, domains, neighbors):
-            #assign_value(var, value, assignment)
-            #forward_check(var, value, domains, assignment, constraints)
-            assignment[var] = value
+            assign_value(var, value, assignment)
+            forward_check(var, value, domains, assignment, constraints, neighbors)
             result = backtrack_search(assignment, variables, domains, constraints, neighbors, size)
             if result:
                 print(f"Debug: result from backtrack search: {result}")
                 return result  # Solution found
 
-            assignment[var] = None # Backtrack
             print(f"Debug: Backtracking on variable {var}")
-            """
-            assignment[var] = ''
+            assignment[var] = None # Backtrack
             for neighbor in domains[var]:
                 if neighbor not in assignment:
-                    domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+                    #domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+                    domains[neighbor] = reduce_domain(neighbor, domains, assignment, constraints, neighbors)
             """
-            assignment[var] = None
+            assignment[var] = None # Backtrack
             for neighbor in neighbors[var]:
                 domains[neighbor] = reduce_domain(neighbor, domains, assignment, constraints, neighbors)
+            """
+
     print("Debug: At the end of backtracking algorithm, no solution found.")
     return None  # No solution
 
@@ -150,7 +150,7 @@ def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], ro
     for i in range(size[0]):
         for j in range(size[1]):
             variable = 'G{}'.format(i * size[1] + j + 1)
-            unary_constraints[variable] = {0, str(grid_values[i][j])}
+            unary_constraints[variable] = {0, grid_values[i][j]}
     constraints.update(unary_constraints)
 
     # Binary constraints for row sums
@@ -173,8 +173,7 @@ def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_su
     domains = generate_domains(size, grid_values)
     constraints = generate_constraints(size, grid_values, row_sums, col_sums)
     neighbors = generate_neighbors(size)
-    #assignment = initialize_variables(variables, domains, constraints, neighbors)
-    assignment = initialize_variables(variables, domains)
+    assignment = initialize_variables(variables, domains, constraints, neighbors)
     result = backtrack_search(assignment, variables, domains, constraints, neighbors, size)
     # Display the generated variables and domains (optional)
     print("Variables:", variables)
