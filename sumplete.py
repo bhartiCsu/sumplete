@@ -1,3 +1,32 @@
+
+"""
+
+ (             *     (    (                       (        )   (                 (
+ )\ )        (  `    )\ ) )\ )        *   )       )\ )  ( /(   )\ )              )\ )
+(()/(    (   )\))(  (()/((()/(  (   ` )  /( (    (()/(  )\()) (()/( (   (   (   (()/(
+ /(_))   )\ ((_)()\  /(_))/(_)) )\   ( )(_)))\    /(_))((_)\   /(_)))\  )\  )\   /(_))
+(_))  _ ((_)(_()((_)(_)) (_))  ((_) (_(_())((_)  (_))    ((_) (_)) ((_)((_)((_) (_))
+/ __|| | | ||  \/  || _ \| |   | __||_   _|| __| / __|  / _ \ | |  \ \ / / | __|| _ \
+\__ \| |_| || |\/| ||  _/| |__ | _|   | |  | _|  \__ \ | (_) || |__ \ V /  | _| |   /
+|___/ \___/ |_|  |_||_|  |____||___|  |_|  |___| |___/  \___/ |____| \_/   |___||_|_\
+
+
+
+This Python script implements a Constraint Satisfaction Problem (CSP) solver for a grid puzzle. 
+The puzzle involves filling a grid with values while satisfying row and column sum constraints.
+The script defines functions for CSP initialization, variable ordering, consistency checking, 
+domain reduction, and backtracking search. It also provides functions for generating variables, 
+domains, neighbors, and constraints based on user input. The main function prompts the user to 
+input the puzzle size, grid values, and target sums. The script then solves the puzzle using 
+the CSP solver and displays the solution or indicates if no solution is found.
+
+
+
+
+
+"""
+
+
 from typing import List, Tuple
 import itertools
 
