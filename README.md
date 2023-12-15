@@ -93,15 +93,16 @@ Let G1-G9 represents grid position and S1-S3 are targeted row sum and S4-S6 are 
  {G1, G2, G3, G4, G5, G6, G7, G8, G9}
 
 # Domain for 3 X 3
-G1: {V1,0}
-G2: {V2,0}
-G3: {V3,0}
-G4: {V4,0}
-G5: {V5,0}
-G6: {V6,0}
-G7: {V7,0}
-G8: {V8,0}
+G1: {V1,0}  
+G2: {V2,0}  
+G3: {V3,0}  
+G4: {V4,0}  
+G5: {V5,0}  
+G6: {V6,0}  
+G7: {V7,0}  
+G8: {V8,0}  
 G9: {V9,0}
+
 Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
 
 # Constraints
