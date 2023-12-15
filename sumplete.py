@@ -1,65 +1,81 @@
 from typing import List, Tuple
+import itertools
 
-def initialize_variables(variables, domains, constraints, neighbors):
+
+def initialize_variables(size, variables, domains, constraints, neighbors):
     assignment = {}
     for var in variables:
-        assignment[var] = domains[var][0]  # Initialize with the first value in the domain
-        if not is_consistent(var, assignment[var], assignment, constraints, domains, neighbors):
+        assignment[var] = 0  # Initialize with 0
+        if not is_consistent(var, assignment[var], assignment, constraints, domains, neighbors, size):
             # If constraints are not satisfied, backtrack and try the second value
             assignment[var] = domains[var][1]
+            if not is_consistent(var, assignment[var], assignment, constraints, domains, neighbors, size):
+                assignment[var] = 0  # If still not consistent, reset to 0
     return assignment
+
 
 def order_variables(variables, domains):
     return sorted(variables, key=lambda var: len(domains[var]))
 
-def is_consistent(variable, value, assignment, constraints, domains, neighbors):
+def is_consistent(variable, value, assignment, constraints, domains, neighbors, size):
     # Check unary constraints
-    if variable in constraints and value not in constraints[variable]:
-        return False
+    # if variable in constraints and value not in constraints[variable]:
+    #     return False
 
-    # Check binary constraints
-    for neighbor in neighbors[variable]:
-        if neighbor in assignment:
-            if (neighbor, value, variable, assignment[neighbor]) in constraints:
-                return False
-            if (variable, value, neighbor, assignment[neighbor]) in constraints:
+    # Form combinations of neighbors
+    combinations = []
+    print("neighbors[variable] length",variable, neighbors)
+    for combination in itertools.combinations(neighbors[variable], 3):
+        combinations.append(combination)
+
+    # Check constraints for each combination
+    for combination in combinations:
+        key = '+'.join(combination)
+        if key in constraints:
+            values_in_assignment = [assignment[var] if var in assignment else 0 for var in combination]
+            print(sum(values_in_assignment))
+            print(list(constraints[key])[0])
+            # Check if all values in the combination are in the assignment list
+            if sum(values_in_assignment) !=  int(list(constraints[key])[0]):
+                # Check if the sum of actual values is less than or equal to the constraint value               
                 return False
 
     return True
 
-def reduce_domain(variable, value, domains, assignment, constraints):
-    reduced_domain = [v for v in domains[variable] if is_consistent(variable, v, assignment, constraints, domains)]
+def reduce_domain(variable, value, domains, assignment, constraints, neighbors, size):
+    reduced_domain = [v for v in domains[variable] if is_consistent(variable, v, assignment, constraints, domains, neighbors, size)]
     return reduced_domain
 
 def assign_value(variable, value, assignment):
     assignment[variable] = value
 
-def forward_check(variable, value, domains, assignment, constraints):
+def forward_check(variable, value, domains, assignment, constraints, size):
     for neighbor in domains[variable]:
         if neighbor not in assignment:
-            domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+            domains[neighbor] = reduce_domain( variable, value, domains, assignment, constraints, neighbor,size)
             
 def select_unassigned_variable(assignment, variables, domains):
-    unassigned_variables = [var for var in variables if not assignment[var]]
+    unassigned_variables = [var for var in variables if assignment.get(var) is None]
     return unassigned_variables[0] if unassigned_variables else None
+
 
 def order_domain_values(variable, domains, assignment, constraints):
     # You can implement your own value ordering heuristic here.
     return domains[variable]
 
-def backtrack_search(assignment, variables, domains, constraints, neighbors):
-    if all(assignment[var] for var in variables):
+def backtrack_search(size, assignment, variables, domains, constraints, neighbors):
+    if all(assignment.get(var) is not None for var in variables):
         return assignment  # Solution found
 
     var = select_unassigned_variable(assignment, variables, domains)
     ordered_values = order_domain_values(var, domains, assignment, constraints)
 
     for value in ordered_values:
-        if is_consistent(var, value, assignment, constraints, domains, neighbors):
+        if is_consistent(var, value, assignment, constraints, domains, neighbors, size):
             assign_value(var, value, assignment)
-            forward_check(var, value, domains, assignment, constraints)
+            forward_check(var, value, domains, assignment, constraints, size)
 
-            result = backtrack_search(assignment, variables, domains, constraints, neighbors)
+            result = backtrack_search(size, assignment, variables, domains, constraints, neighbors)
             if result:
                 return result  # Solution found
 
@@ -67,7 +83,7 @@ def backtrack_search(assignment, variables, domains, constraints, neighbors):
             assignment[var] = ''
             for neighbor in domains[var]:
                 if neighbor not in assignment:
-                    domains[neighbor] = reduce_domain(neighbor, value, domains, assignment, constraints)
+                    domains[neighbor] = reduce_domain(var, value, domains, assignment, constraints, neighbor, size)
 
     return None  # No solution
 
@@ -125,25 +141,19 @@ def generate_constraints(size: Tuple[int, int], grid_values: List[List[int]], ro
 
     return constraints
 
-def get_sumplete_csp(size: Tuple[int, int], grid_values: List[List[int]], row_sums: List[int], col_sums: List[int]) -> Tuple[List[List[int]], List[int], List[int]]:
-    # Generate variables, domains, and constraints
+def get_sumplete_csp(size, grid, row_sums, col_sums):
     variables = generate_variables(size)
-    domains = generate_domains(size, grid_values)
-    constraints = generate_constraints(size, grid_values, row_sums, col_sums)
+    domains = generate_domains(size, grid)
+    constraints = generate_constraints(size, grid, row_sums, col_sums)
     neighbors = generate_neighbors(size)
-    assignment = initialize_variables(variables, domains, constraints, neighbors)
-    result = backtrack_search(assignment, variables, domains, constraints, neighbors)
-    # Display the generated variables and domains (optional)
-    print("Variables:", variables)
-    print("Domains:", domains)
-    print("Constraints:", constraints)
-    print("Neighbors:", neighbors)
-    print("Result:", result)
-    
+
+    assignment = initialize_variables(size, variables, domains, constraints, neighbors)
+    result = backtrack_search(size, assignment, variables, domains, constraints, neighbors)
+
     if result:
         print("Solution found:")
         for var, value in result.items():
-            print("{var}: {value}")
+            print("var: ", var, "value : ", value)
     else:
         print("No solution found.")
     
@@ -220,12 +230,14 @@ def main():
         except (ValueError, IndexError):
             print("Invalid input. Please enter a valid grid size.")
 
+   
     # Display the grid format
     display_grid_format(size)
 
     # Get grid values, row sums, and column sums from the user
     grid, row_sums, col_sums = get_grid_values(size)
-
+    
+ 
     # Display the entered values
     print("\nEntered values:")
     print("Grid:")
