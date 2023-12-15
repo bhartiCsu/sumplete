@@ -148,8 +148,8 @@ After providing input, the program will display the entered values and the outpu
 
 **Example Output:**
 
-Entered values:
-Grid:
+Entered values:  
+Grid:  
 [9, 8, 3]  
 [6, 6, 3]  
 [3, 8, 8]  
