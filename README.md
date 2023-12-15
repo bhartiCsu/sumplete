@@ -78,11 +78,14 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 ## Variables, Domains and Constraints
 
 # 3 X 3 Puzzle
-G1 | G2 | G3   S1
-G4 | G5 | G6   S2
-G7 | G8 | G9   S3
 
-S4 | S5 | S6
+| G1 | G2 | G3 | S1 |
+|----|----|----|----|
+| G4 | G5 | G6 | S2 |
+| G7 | G8 | G9 | S3 |
+
+| S4 | S5 | S6 |
+|----|----|----|
 
 Let G1-G9 represents grid position and S1-S3 are targeted row sum and S4-S6 are targeted column sum.
 
@@ -107,12 +110,12 @@ Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
 - Each grid can either have 0 or V where V is the original value in the grid.
 ### Binary
 
-I. G1 + G2 + G3 = S1
-II. G1 + G4 + G7 = S4
-III. G4 + G5 + G6 = S2
-IV. G2 + G5 + G8 = S5
-V. G7 + G8 + G9 = S3
-VI. G3 + G6 + G9 = S6
+1. G1 + G2 + G3 = S1
+2. G1 + G4 + G7 = S4
+3. G4 + G5 + G6 = S2
+4. G2 + G5 + G8 = S5
+5. G7 + G8 + G9 = S3
+6. G3 + G6 + G9 = S6
 
 ## Constraint Graph
 
