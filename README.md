@@ -37,7 +37,7 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 ## Team Members - Foos Who Code
 
 * Abel Mendoza
-* [Team Member 2]
+* Bharti Moryani
 * Cesar Gutierrez
 * [Team Member 4]
 * [Team Member 5]
