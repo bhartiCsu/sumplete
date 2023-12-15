@@ -122,6 +122,56 @@ Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
 
 
 
+## How to Run
+
+# Running the Sudoku Solver
+
+To run the Sumplete Solver, follow these steps:
+
+1. **Download and Extract the Tar Folder:**
+    - Download the tar folder 'sumplete.tar' containing the Sumplete solver.
+    - Extract the contents of the tar folder to a directory of your choice.
+    - cd your-tar-folder
+
+2. Run the python script
+    - open terminal here
+    - python backtrackAc3.py
+
+3. Provide Input:
+    - Enter the grid size when prompted (e.g., 3X3, 4X4, 5X5, 6X6, 7X7, 8X8, or 9X9).
+    - Input values for each grid in the specified format (e.g., G1, G2, ..., G9).
+    - Input target row sums (S1 to S3).
+    - Input target column sums (S4 to S6).
+4. View Output: 
+
+After providing input, the program will display the entered values and the output, including variable assignments, domains, constraints, and whether a solution was found.
+Example Output:
+
+Entered values:
+Grid:
+[9, 8, 3]
+[6, 6, 3]
+[3, 8, 8]
+Row Sums: [12, 9, 0]
+Column Sums: [9, 6, 6]
+variables :  ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9']
+Neighbors :  {'G3': ['G3', 'G1', 'G2', 'G6', 'G9'], ... }
+Domains :  {'G3': [0, 3], 'G9': [0, 8], ... }
+Constraints :  {'G1+G2+G3': {'12'}, ... }
+ac3 results :  True
+Solution found:
+var: G1 value : 9
+var: G2 value : X
+var: G3 value : 3
+var: G4 value : X
+var: G5 value : 6
+var: G6 value : 3
+var: G7 value : X
+var: G8 value : X
+var: G9 value : X
+
+
+
 
 ## Documentation
 
