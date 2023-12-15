@@ -40,7 +40,7 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 
 * Abel Mendoza
 * Bharti Moryani
-* Cesar Gutierrez
+* [Team Member 3]
 * [Team Member 4]
 * [Team Member 5]
 
@@ -74,9 +74,48 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 
 
 
-## Getting Started
+### Getting Started
+## Variables, Domains and Constraints
 
-..............Write Instructions Here
+# 3 X 3 Puzzle
+G1 | G2 | G3   S1
+G4 | G5 | G6   S2
+G7 | G8 | G9   S3
+
+S4 | S5 | S6
+
+Let G1-G9 represents grid position and S1-S3 are targeted row sum and S4-S6 are targeted column sum.
+
+# Variables
+ {G1, G2, G3, G4, G5, G6, G7, G8, G9}
+
+# Domain for 3 X 3
+G1: {V1,0}
+G2: {V2,0}
+G3: {V3,0}
+G4: {V4,0}
+G5: {V5,0}
+G6: {V6,0}
+G7: {V7,0}
+G8: {V8,0}
+G9: {V9,0}
+Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
+
+# Constraints
+
+Unary: Each grid can either have 0 or V where V is the original value in the grid.
+Binary:
+I. G1 + G2 + G3 = S1
+II. G1 + G4 + G7 = S4
+III. G4 + G5 + G6 = S2
+IV. G2 + G5 + G8 = S5
+V. G7 + G8 + G9 = S3
+VI. G3 + G6 + G9 = S6
+
+## Constraint Graph
+
+![Constraint Graph](image/README/Constraint Graph.jpeg)
+
 
 ## Documentation
 
