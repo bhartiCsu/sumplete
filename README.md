@@ -103,8 +103,10 @@ Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
 
 # Constraints
 
-Unary: Each grid can either have 0 or V where V is the original value in the grid.
-Binary:
+### Unary
+- Each grid can either have 0 or V where V is the original value in the grid.
+### Binary
+
 I. G1 + G2 + G3 = S1
 II. G1 + G4 + G7 = S4
 III. G4 + G5 + G6 = S2
@@ -114,7 +116,7 @@ VI. G3 + G6 + G9 = S6
 
 ## Constraint Graph
 
-![Constraint Graph](image/README/Constraint Graph.jpeg)
+
 
 
 ## Documentation
