@@ -34,6 +34,8 @@ Sumplete follows a simple set of rules, combining elements of Sudoku and Kakuro:
 
 Understanding these rules is crucial for formulating Sumplete as a constraint satisfaction problem and applying solving algorithms. The combination of logical deduction and backtracking makes Sumplete an intriguing challenge for both AI and human players.
 
+
+
 ## Team Members - Foos Who Code
 
 * Abel Mendoza
@@ -58,10 +60,10 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 ## Grids Used
 
 ## 3x3
-
+![1702597058094](image/README/1702597058094.png)
 
 ## 4x4
-
+![1702597101373](image/README/1702597101373.png)
 ## 5x5
 
 ![1702597113231](image/README/1702597113231.png)
