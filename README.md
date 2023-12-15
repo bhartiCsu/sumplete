@@ -124,7 +124,7 @@ Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
 
 ## How to Run
 
-# Running the Sudoku Solver
+# Running the Sumplete Solver
 
 To run the Sumplete Solver, follow these steps:
 
@@ -145,21 +145,25 @@ To run the Sumplete Solver, follow these steps:
 4. View Output: 
 
 After providing input, the program will display the entered values and the output, including variable assignments, domains, constraints, and whether a solution was found.
-Example Output:
+
+**Example Output:**
 
 Entered values:
 Grid:
 [9, 8, 3]
 [6, 6, 3]
-[3, 8, 8]
-Row Sums: [12, 9, 0]
-Column Sums: [9, 6, 6]
-variables :  ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9']
-Neighbors :  {'G3': ['G3', 'G1', 'G2', 'G6', 'G9'], ... }
-Domains :  {'G3': [0, 3], 'G9': [0, 8], ... }
-Constraints :  {'G1+G2+G3': {'12'}, ... }
-ac3 results :  True
-Solution found:
+[3, 8, 8]  
+
+
+Row Sums: [12, 9, 0]  
+Column Sums: [9, 6, 6]  
+variables :  ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9']  
+Neighbors :  {'G3': ['G3', 'G1', 'G2', 'G6', 'G9'], ... }  
+Domains :  {'G3': [0, 3], 'G9': [0, 8], ... }  
+Constraints :  {'G1+G2+G3': {'12'}, 'G4': {'6', '0'}, 'G7+G8+G9': {'0'}, 'G1+G4+G7': {'9'}, 'G7': {'0', '3'}, 'G3+G6+G9': {'6'}, 'G6': {'0', '3'}, 'G4+G5+G6': {'9'}, 'G9': {'8', '0'}, 'G2+G5+G8': {'6'}, 'G5': {'6', '0'}, 'G3': {'0', '3'}, 'G8': {'8', '0'}, 'G2': {'8', '0'}, 'G1': {'9', '0'}}  
+ac3 results :  True  
+Solution found:  
+
 var: G1 value : 9
 var: G2 value : X
 var: G3 value : 3
