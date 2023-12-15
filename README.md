@@ -150,8 +150,8 @@ After providing input, the program will display the entered values and the outpu
 
 Entered values:
 Grid:
-[9, 8, 3]
-[6, 6, 3]
+[9, 8, 3]  
+[6, 6, 3]  
 [3, 8, 8]  
 
 
@@ -164,15 +164,15 @@ Constraints :  {'G1+G2+G3': {'12'}, 'G4': {'6', '0'}, 'G7+G8+G9': {'0'}, 'G1+G4+
 ac3 results :  True  
 Solution found:  
 
-var: G1 value : 9
-var: G2 value : X
-var: G3 value : 3
-var: G4 value : X
-var: G5 value : 6
-var: G6 value : 3
-var: G7 value : X
-var: G8 value : X
-var: G9 value : X
+var: G1 value : 9  
+var: G2 value : X  
+var: G3 value : 3  
+var: G4 value : X  
+var: G5 value : 6  
+var: G6 value : 3  
+var: G7 value : X  
+var: G8 value : X  
+var: G9 value : X  
 
 
 
