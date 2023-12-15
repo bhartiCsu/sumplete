@@ -106,7 +106,8 @@ G9: {V9,0}
 Where V1, V2, V3, V4, V5, V6, V7, V8, V9 are the original values in the grid.
 
 # Constraints
-
+Constraint Graph:
+![Constraint Graph](image/README/Constraint Graph.png)
 ### Unary
 - Each grid can either have 0 or V where V is the original value in the grid.
 ### Binary
