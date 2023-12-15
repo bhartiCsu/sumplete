@@ -38,7 +38,7 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 
 * Abel Mendoza
 * [Team Member 2]
-* [Team Member 3]
+* Cesar Gutierrez
 * [Team Member 4]
 * [Team Member 5]
 
