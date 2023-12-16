@@ -53,7 +53,7 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 
 ## Project Structure
 
-* `sumplete.py`: Main Python script containing the SumpleteSolver class implementation.
+* `backtrackAc3.py`: Main Python script containing the SumpleteSolver class implementation.
 * `README.md`: This file, providing an overview of the project.
 
 
