@@ -119,13 +119,8 @@ Constraint Graph:
 5. G7 + G8 + G9 = S3
 6. G3 + G6 + G9 = S6
 
-## Constraint Graph
 
-
-
-## How to Run
-
-# Running the Sumplete Solver
+# Instructions to Run the Sumplete Solver
 
 To run the Sumplete Solver, follow these steps:
 
