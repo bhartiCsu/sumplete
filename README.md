@@ -125,7 +125,7 @@ Constraint Graph:
 To run the Sumplete Solver, follow these steps:
 
 1. **Download and Extract the Tar Folder:**
-    - Download the tar folder 'sumplete.tar' containing the Sumplete solver.
+    - Download the tar folder 'sumplete.tar.gz' containing the Sumplete solver.
     - Extract the contents of the tar folder to a directory of your choice.
     - cd your-tar-folder
 
