@@ -42,7 +42,7 @@ Understanding these rules is crucial for formulating Sumplete as a constraint sa
 * Bharti Moryani
 * Cesar Gutierrez
 * Joel Perez
-* [Team Member 5]
+* James Thyen
 
 ## Course Information
 
